@@ -11,6 +11,7 @@ import static novi.blackjack.CardValue.CARD_VALUES;
 public class Deck {
     private final int numberOfCards = 48;
     private List<Card> remainingCards = new ArrayList<>();
+    private boolean isEmpty = false;
 
     public Deck() {
         for (int j = 0; j < CARD_SUITES.length; j++) {
@@ -25,12 +26,14 @@ public class Deck {
         Collections.shuffle(remainingCards);
     }
 
-    public void isEmpty() {
-
+    public boolean isEmpty() {
+        return remainingCards.isEmpty();
     }
 
-    public void getNextCard() {
-
+    public Card getNextCard() {
+        Card nextCard = remainingCards.get(0);
+        remainingCards.remove(0);
+        return nextCard;
     }
 }
 

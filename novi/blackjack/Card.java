@@ -10,10 +10,20 @@ public class Card {
         this.value = value;
     }
 
-    public String render(){
-        return String.format("| %s %s |", this.value, this.suite);
+    // TODO Make toString() better!
+    @Override
+    public String toString() {
+        return "Card{" +
+                "suite=" + suite +
+                ", value=" + value +
+                '}';
     }
 
+    public CardSuite getCardSuite() {
+        return suite;
+    }
 
-
+    public CardValue getCardValue() {
+        return value;
+    }
 }

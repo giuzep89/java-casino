@@ -4,27 +4,50 @@ import java.util.Scanner;
 public class BlackjackGame {
     private Scanner inputScanner;
 
-
     public BlackjackGame(Scanner inputScanner) {
         this.inputScanner = inputScanner;
     }
 
-
     public void playGame(){
-//        TODO 2 The game makes a deck with all the necessary cards;
+        System.out.println("Welcome to a new game.");
         Deck deck = new Deck();
 
-//        TODO 3 The game makes the player and dealer objects, both with an empty hand
         Player player = new Player();
-        Hand playersHand = new Hand();
-
         Dealer dealer = new Dealer();
-        Hand dealersHand = new Hand();
 
-//        TODO 4 The game shuffles the deck
         deck.shuffle();
+        System.out.println("The deck has been shuffled.");
 
-//        TODO 5 The game gives the player 2 cards
+        while(!deck.isEmpty()){
+            Card[] twoCardsToPlayer = {deck.getNextCard(), deck.getNextCard()};
+            player.addCardsToHand(twoCardsToPlayer);
+
+//            System.out.printf("Here's two cards:".........);
+//            TODO Make renderHand method in player, print the hand in this step
+
+            Card[] oneCardToDealer = {deck.getNextCard()};
+            dealer.addCardsToHand(oneCardToDealer);
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
 
 //        TODO 6 The game gives the dealer 1 card
     }
