@@ -1,4 +1,5 @@
 package novi.blackjack;
+
 import java.util.Scanner;
 
 public class BlackjackGame {
@@ -8,7 +9,7 @@ public class BlackjackGame {
         this.inputScanner = inputScanner;
     }
 
-    public void playGame(){
+    public void playGame() {
         System.out.println("Welcome to a new game.");
         Deck deck = new Deck();
 
@@ -18,7 +19,7 @@ public class BlackjackGame {
         deck.shuffle();
         System.out.println("The deck has been shuffled.");
 
-        while(!deck.isEmpty()){
+        while (!deck.isEmpty()) {
             Card[] twoCardsToPlayer = {deck.getNextCard(), deck.getNextCard()};
             player.addCardsToHand(twoCardsToPlayer);
 
@@ -30,45 +31,47 @@ public class BlackjackGame {
             System.out.printf("And one card for the dealer: %s\n", dealer.renderHand());
 
             System.out.println("Would you like to hit or stay? Please type your answer");
-            String hitOrStay = this.inputScanner.nextLine().trim().toLowerCase();
 
+            boolean hasMadeAChoice = false;
+            while (!hasMadeAChoice) {
+                String askPlayerHitOrStay = this.inputScanner.nextLine().trim().toLowerCase();
 
-            //TODO write this step again!!!
-            switch (hitOrStay){
-                case "hit":
-                    Card[] oneMoreCard = {deck.getNextCard()};
-                    player.addCardsToHand(oneMoreCard);
-                    break;
-                case "stay":
-                    player.isStaying();
-                    break;
-                default:
-                    System.out.println("Incorrect answer, please type 'hit' or 'stay'");
+                switch (askPlayerHitOrStay) {
+                    case "hit":
+                        Card[] oneMoreCard = {deck.getNextCard()};
+                        player.addCardsToHand(oneMoreCard);
+                        hasMadeAChoice = true;
+                        break;
+                    case "stay":
+                        player.setStaying(true);
+                        hasMadeAChoice = true;
+                        break;
+                    default:
+                        System.out.println("Incorrect answer, please type 'hit' or 'stay'");
+                }
             }
 
-
-            if(player.isBust()){
+            if (player.isBust()) {
                 System.out.println("Bust! You have lost this round.");
                 System.out.println("Would you like to play another round? Type yes or no");
                 String continueOrNot = inputScanner.nextLine().trim().toLowerCase();
 
-                if(continueOrNot.equals("yes")){
+                if (continueOrNot.equals("yes")) {
                     player.clearPlayersHand();
-                } else if (continueOrNot.equals("no")){
+                } else if (continueOrNot.equals("no")) {
                     System.out.println("Thank you for playing");
                     break;
                 }
-            } else if(player.isStaying()){
-                // TODO Go on with step 10!!
             }
 
+            //TODO 10
+            // - Ask dealer to hit or stay. If the value of the dealer's hand is below 17, hit, otherwise stay
 
+            //TODO 11
+            // - If hit: give dealer a card
 
-
-
-
-
-
+            //TODO 12
+            // -Is the dealer BUST? Player wins
 
         }
     }
