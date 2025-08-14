@@ -14,13 +14,29 @@ public class Hand {
         this.cards.add(card);
     }
 
-    public void getTotalValue(){
+    public int getTotalValue(){
         int totalValue = 0;
         for (int i = 0; i < cards.size(); i++) {
             Card oneCard = cards.get(i);
             int valueOfOneCard = oneCard.getCardValue().getValue();
             totalValue += valueOfOneCard;
         }
+        return totalValue;
+    }
+
+    public void clearHand(){
+        cards.clear();
+    }
+
+    @Override
+    public String toString(){
+        List<String> cardsInHand = new ArrayList<>();
+
+        for(Card card : this.cards){
+            cardsInHand.add(card.toString());
+        }
+
+        return cardsInHand.toString();
     }
 
 

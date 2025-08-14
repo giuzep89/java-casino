@@ -10,20 +10,16 @@ public class Card {
         this.value = value;
     }
 
-    // TODO Make toString() better!
-    @Override
-    public String toString() {
-        return "Card{" +
-                "suite=" + suite +
-                ", value=" + value +
-                '}';
-    }
-
     public CardSuite getCardSuite() {
         return suite;
     }
 
     public CardValue getCardValue() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return "|~~~> " + this.value.getValue() + " of " + this.suite.getName() + " <~~~|";
     }
 }

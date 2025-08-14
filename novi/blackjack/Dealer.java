@@ -12,4 +12,8 @@ public class Dealer {
         }
     }
 
+    public String renderHand(){
+        return hand.toString();
+    }
+
 }
