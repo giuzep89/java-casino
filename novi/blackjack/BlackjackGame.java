@@ -9,6 +9,7 @@ public class BlackjackGame {
         this.inputScanner = inputScanner;
     }
 
+
     public void playGame() {
         System.out.println("Welcome to a new game.");
         Deck deck = new Deck();
@@ -51,27 +52,64 @@ public class BlackjackGame {
                 }
             }
 
+
             if (player.isBust()) {
-                System.out.println("Bust! You have lost this round.");
-                System.out.println("Would you like to play another round? Type yes or no");
+                System.out.println("Bust! You have lost this round.\n" +
+                        "Would you like to play another round? Type yes or no");
                 String continueOrNot = inputScanner.nextLine().trim().toLowerCase();
 
                 if (continueOrNot.equals("yes")) {
                     player.clearPlayersHand();
+                    dealer.clearDealersHand();
+                    continue;
                 } else if (continueOrNot.equals("no")) {
                     System.out.println("Thank you for playing");
                     break;
                 }
             }
 
-            //TODO 10
-            // - Ask dealer to hit or stay. If the value of the dealer's hand is below 17, hit, otherwise stay
 
-            //TODO 11
-            // - If hit: give dealer a card
+            System.out.println("Dealer's turn: hit or stay?");
+            if(dealer.getHandValue() < 17){
+                Card[] oneMoreCard = {deck.getNextCard()};
+                dealer.addCardsToHand(oneMoreCard);
+                System.out.println("The dealer hits and receives one more card.");
+            } else {
+                dealer.setStaying(true);
+                System.out.println("The dealer stays.");
+            }
 
-            //TODO 12
-            // -Is the dealer BUST? Player wins
+
+            if(dealer.isBust()){
+                System.out.println("The dealer is bust. Congratulations player, you have won this round!\n" +
+                        "Would you like to play another round? Type yes or no");
+                String continueOrNot = inputScanner.nextLine().trim().toLowerCase();
+                if (continueOrNot.equals("yes")) {
+                    player.clearPlayersHand();
+                    dealer.clearDealersHand();
+                    continue;
+                } else if (continueOrNot.equals("no")) {
+                    System.out.println("Thank you for playing");
+                    break;
+                }
+            }
+
+            int playersHand = player.getHandValue();
+            int dealersHand = dealer.getHandValue();
+            if(dealer.isStaying() && playersHand > dealersHand){
+                System.out.println("The dealer loses. Congratulations player, you have won this round!");
+
+            }
+
+
+            // TODO Create method for continueOrNot
+
+
+
+
+
+
+
 
         }
     }
