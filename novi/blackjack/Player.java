@@ -18,6 +18,10 @@ public class Player {
         return hand.toString();
     }
 
+    public Hand getHand() {
+        return hand;
+    }
+
     public int getHandValue(){
         return this.hand.getTotalValue();
     }
@@ -32,10 +36,6 @@ public class Player {
 
     public boolean isStaying() {
         return this.isStaying;
-    }
-
-    public void clearPlayersHand(){
-        this.hand.clearHand();
     }
 
 }

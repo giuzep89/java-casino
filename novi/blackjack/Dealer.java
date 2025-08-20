@@ -14,6 +14,10 @@ public class Dealer {
         }
     }
 
+    public Hand getHand() {
+        return hand;
+    }
+
     public int getHandValue(){
         return this.hand.getTotalValue();
     }
@@ -28,10 +32,6 @@ public class Dealer {
 
     public void setStaying(boolean staying) {
         this.isStaying = staying;
-    }
-
-    public void clearDealersHand(){
-        this.hand.clearHand();
     }
 
     public String renderHand(){

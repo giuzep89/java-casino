@@ -9,6 +9,49 @@ public class BlackjackGame {
         this.inputScanner = inputScanner;
     }
 
+    public boolean continueOrNot() {
+        boolean wantsToContinue = false;
+        System.out.println("Would you like to play another round? Type yes or no");
+        String continueOrNot = inputScanner.nextLine().trim().toLowerCase();
+        if (continueOrNot.equals("yes")) {
+            wantsToContinue = true;
+        }
+        return wantsToContinue;
+    }
+
+    public boolean hitOrStay(Player player, Deck deck){
+        boolean hasMadeAChoice = false;
+        String askPlayerHitOrStay = this.inputScanner.nextLine().trim().toLowerCase();
+        switch (askPlayerHitOrStay) {
+            case "hit":
+                Card[] oneMoreCard = {deck.getNextCard()};
+                player.addCardsToHand(oneMoreCard);
+                hasMadeAChoice = true;
+                break;
+            case "stay":
+                player.setStaying(true);
+                hasMadeAChoice = true;
+                break;
+            default:
+                System.out.println("Incorrect answer, please type 'hit' or 'stay'");
+        }
+        return hasMadeAChoice;
+    }
+    
+    public void clearPlayersHand(Player player){
+        player.getHand().clearHand();
+    }
+    
+    public void clearDealersHand(Dealer dealer){
+        dealer.getHand().clearHand();
+    }
+
+    public void resetRound(Player player, Dealer dealer){
+        clearPlayersHand(player);
+        clearDealersHand(dealer);
+        player.setStaying(false);
+        dealer.setStaying(false);
+    }
 
     public void playGame() {
         System.out.println("Welcome to a new game.");
@@ -20,7 +63,8 @@ public class BlackjackGame {
         deck.shuffle();
         System.out.println("The deck has been shuffled.");
 
-        while (!deck.isEmpty()) {
+
+        while (true) {
             Card[] twoCardsToPlayer = {deck.getNextCard(), deck.getNextCard()};
             player.addCardsToHand(twoCardsToPlayer);
 
@@ -35,34 +79,16 @@ public class BlackjackGame {
 
             boolean hasMadeAChoice = false;
             while (!hasMadeAChoice) {
-                String askPlayerHitOrStay = this.inputScanner.nextLine().trim().toLowerCase();
-
-                switch (askPlayerHitOrStay) {
-                    case "hit":
-                        Card[] oneMoreCard = {deck.getNextCard()};
-                        player.addCardsToHand(oneMoreCard);
-                        hasMadeAChoice = true;
-                        break;
-                    case "stay":
-                        player.setStaying(true);
-                        hasMadeAChoice = true;
-                        break;
-                    default:
-                        System.out.println("Incorrect answer, please type 'hit' or 'stay'");
-                }
+                hasMadeAChoice = hitOrStay(player, deck);
             }
 
 
             if (player.isBust()) {
-                System.out.println("Bust! You have lost this round.\n" +
-                        "Would you like to play another round? Type yes or no");
-                String continueOrNot = inputScanner.nextLine().trim().toLowerCase();
-
-                if (continueOrNot.equals("yes")) {
-                    player.clearPlayersHand();
-                    dealer.clearDealersHand();
+                System.out.println("Bust! You have lost this round.");
+                continueOrNot();
+                if (continueOrNot()) {
                     continue;
-                } else if (continueOrNot.equals("no")) {
+                } else {
                     System.out.println("Thank you for playing");
                     break;
                 }
@@ -70,7 +96,7 @@ public class BlackjackGame {
 
 
             System.out.println("Dealer's turn: hit or stay?");
-            if(dealer.getHandValue() < 17){
+            if (dealer.getHandValue() < 17) {
                 Card[] oneMoreCard = {deck.getNextCard()};
                 dealer.addCardsToHand(oneMoreCard);
                 System.out.println("The dealer hits and receives one more card.");
@@ -80,37 +106,40 @@ public class BlackjackGame {
             }
 
 
-            if(dealer.isBust()){
-                System.out.println("The dealer is bust. Congratulations player, you have won this round!\n" +
-                        "Would you like to play another round? Type yes or no");
-                String continueOrNot = inputScanner.nextLine().trim().toLowerCase();
-                if (continueOrNot.equals("yes")) {
-                    player.clearPlayersHand();
-                    dealer.clearDealersHand();
+            if (dealer.isBust()) {
+                System.out.println("The dealer is bust. Congratulations player, you have won this round!");
+                continueOrNot();
+                if (continueOrNot()) {
                     continue;
-                } else if (continueOrNot.equals("no")) {
+                } else {
                     System.out.println("Thank you for playing");
                     break;
                 }
             }
 
+
             int playersHand = player.getHandValue();
             int dealersHand = dealer.getHandValue();
-            if(dealer.isStaying() && playersHand > dealersHand){
-                System.out.println("The dealer loses. Congratulations player, you have won this round!");
-
+            if (dealer.isStaying() && playersHand > dealersHand) {
+                System.out.println("The dealer is bust. Congratulations player, you have won this round!");
+                continueOrNot();
+                if (continueOrNot()) {
+                } else {
+                    System.out.println("Thank you for playing");
+                    break;
+                }
+            } else if (player.isStaying() && playersHand <= dealersHand) {
+                System.out.println("The dealer wins. Player, you have lost this round.");
+                continueOrNot();
+                if (continueOrNot()) {
+                } else {
+                    System.out.println("Thank you for playing");
+                    break;
+                }
             }
-
-
-            // TODO Create method for continueOrNot
-
-
-
-
-
-
-
-
         }
     }
 }
+
+
+// TODO Add print/render cards at decisional steps!!
