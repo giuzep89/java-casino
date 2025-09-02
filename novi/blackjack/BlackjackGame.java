@@ -53,6 +53,7 @@ public class BlackjackGame {
         clearDealersHand(dealer);
         player.setStaying(false);
         dealer.setStaying(false);
+        System.out.println("Very well, another round begins.");
     }
 
     public void playGame() {
@@ -80,7 +81,7 @@ public class BlackjackGame {
 
 
         while (true) {
-            System.out.println("Would you like to hit or stay? Please type your answer");
+            System.out.println("Would you like to hit or stay? Please type your answer:");
 
             boolean hasMadeAChoice = false;
             while (!hasMadeAChoice) {
@@ -112,8 +113,8 @@ public class BlackjackGame {
 
             if (dealer.isBust()) {
                 System.out.println("The dealer is bust. Congratulations player, you have won this round!");
-                continueOrNot();
                 if (continueOrNot()) {
+                    resetRound(player, dealer);
                     continue;
                 } else {
                     System.out.println("Thank you for playing");
@@ -125,8 +126,9 @@ public class BlackjackGame {
             int playersHand = player.getHandValue();
             int dealersHand = dealer.getHandValue();
             if (dealer.isStaying() && playersHand > dealersHand) {
-                System.out.println("The dealer is bust. Congratulations player, you have won this round!");
+                System.out.println("The dealer loses. Congratulations player, you have won this round!");
                 if (continueOrNot()) {
+                    resetRound(player, dealer);
                 } else {
                     System.out.println("Thank you for playing");
                     break;
@@ -134,6 +136,7 @@ public class BlackjackGame {
             } else if (player.isStaying() && playersHand <= dealersHand) {
                 System.out.println("The dealer wins. Player, you have lost this round.");
                 if (continueOrNot()) {
+                    resetRound(player, dealer);
                 } else {
                     System.out.println("Thank you for playing");
                     break;
