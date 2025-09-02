@@ -26,10 +26,12 @@ public class BlackjackGame {
             case "hit":
                 Card[] oneMoreCard = {deck.getNextCard()};
                 player.addCardsToHand(oneMoreCard);
+                System.out.printf("You chose to hit, here's another card. You current hand is: %s\n", player.renderHand());
                 hasMadeAChoice = true;
                 break;
             case "stay":
                 player.setStaying(true);
+                System.out.printf("You chose to stay. Your current hand is: %s\n", player.renderHand());
                 hasMadeAChoice = true;
                 break;
             default:
@@ -64,17 +66,20 @@ public class BlackjackGame {
         System.out.println("The deck has been shuffled.");
 
 
+
+        Card[] twoCardsToPlayer = {deck.getNextCard(), deck.getNextCard()};
+        player.addCardsToHand(twoCardsToPlayer);
+
+        System.out.printf("Here's your first 2 cards: %s\n", player.renderHand());
+
+        Card[] oneCardToDealer = {deck.getNextCard()};
+        dealer.addCardsToHand(oneCardToDealer);
+
+        System.out.printf("And one card for the dealer: %s\n", dealer.renderHand());
+
+
+
         while (true) {
-            Card[] twoCardsToPlayer = {deck.getNextCard(), deck.getNextCard()};
-            player.addCardsToHand(twoCardsToPlayer);
-
-            System.out.printf("Here's your first 2 cards: %s\n", player.renderHand());
-
-            Card[] oneCardToDealer = {deck.getNextCard()};
-            dealer.addCardsToHand(oneCardToDealer);
-
-            System.out.printf("And one card for the dealer: %s\n", dealer.renderHand());
-
             System.out.println("Would you like to hit or stay? Please type your answer");
 
             boolean hasMadeAChoice = false;
@@ -85,7 +90,6 @@ public class BlackjackGame {
 
             if (player.isBust()) {
                 System.out.println("Bust! You have lost this round.");
-                continueOrNot();
                 if (continueOrNot()) {
                     continue;
                 } else {
@@ -99,10 +103,10 @@ public class BlackjackGame {
             if (dealer.getHandValue() < 17) {
                 Card[] oneMoreCard = {deck.getNextCard()};
                 dealer.addCardsToHand(oneMoreCard);
-                System.out.println("The dealer hits and receives one more card.");
+                System.out.printf("The dealer hits and receives one more card. The dealer's hand is: %s\n", dealer.renderHand());
             } else {
                 dealer.setStaying(true);
-                System.out.println("The dealer stays.");
+                System.out.printf("The dealer stays. The dealer's hand is: %s\n", dealer.renderHand());
             }
 
 
@@ -122,7 +126,6 @@ public class BlackjackGame {
             int dealersHand = dealer.getHandValue();
             if (dealer.isStaying() && playersHand > dealersHand) {
                 System.out.println("The dealer is bust. Congratulations player, you have won this round!");
-                continueOrNot();
                 if (continueOrNot()) {
                 } else {
                     System.out.println("Thank you for playing");
@@ -130,7 +133,6 @@ public class BlackjackGame {
                 }
             } else if (player.isStaying() && playersHand <= dealersHand) {
                 System.out.println("The dealer wins. Player, you have lost this round.");
-                continueOrNot();
                 if (continueOrNot()) {
                 } else {
                     System.out.println("Thank you for playing");
@@ -140,6 +142,3 @@ public class BlackjackGame {
         }
     }
 }
-
-
-// TODO Add print/render cards at decisional steps!!

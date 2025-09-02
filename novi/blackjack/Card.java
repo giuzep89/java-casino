@@ -20,6 +20,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "|~~~> " + this.value.getValue() + " of " + this.suite.getName() + " <~~~|";
+        return "|~~~> " + this.value.getName() + " of " + this.suite.getName() + " <~~~|";
     }
 }

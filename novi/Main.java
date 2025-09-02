@@ -12,8 +12,6 @@ public class Main {
 
         BlackjackGame game = new BlackjackGame(inputScanner);
 
-
-
-//        game.playGame();
+        game.playGame();
     }
 }
