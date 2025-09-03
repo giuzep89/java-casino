@@ -27,11 +27,13 @@ public class BlackjackGame {
                 Card[] oneMoreCard = {deck.getNextCard()};
                 player.addCardsToHand(oneMoreCard);
                 System.out.printf("You chose to hit, here's another card. You current hand is: %s\n", player.renderHand());
+                System.out.println();
                 hasMadeAChoice = true;
                 break;
             case "stay":
                 player.setStaying(true);
                 System.out.printf("You chose to stay. Your current hand is: %s\n", player.renderHand());
+                System.out.println();
                 hasMadeAChoice = true;
                 break;
             default:
@@ -65,6 +67,7 @@ public class BlackjackGame {
 
         deck.shuffle();
         System.out.println("The deck has been shuffled.");
+        System.out.println();
 
 
 
@@ -77,7 +80,7 @@ public class BlackjackGame {
         dealer.addCardsToHand(oneCardToDealer);
 
         System.out.printf("And one card for the dealer: %s\n", dealer.renderHand());
-
+        System.out.println();
 
 
         while (true) {
@@ -92,6 +95,7 @@ public class BlackjackGame {
             if (player.isBust()) {
                 System.out.println("Bust! You have lost this round.");
                 if (continueOrNot()) {
+                    System.out.println("Very well, another round begins.");
                     continue;
                 } else {
                     System.out.println("Thank you for playing");
@@ -105,9 +109,11 @@ public class BlackjackGame {
                 Card[] oneMoreCard = {deck.getNextCard()};
                 dealer.addCardsToHand(oneMoreCard);
                 System.out.printf("The dealer hits and receives one more card. The dealer's hand is: %s\n", dealer.renderHand());
+                System.out.println();
             } else {
                 dealer.setStaying(true);
                 System.out.printf("The dealer stays. The dealer's hand is: %s\n", dealer.renderHand());
+                System.out.println();
             }
 
 
