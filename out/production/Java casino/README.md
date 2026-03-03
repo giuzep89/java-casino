@@ -14,7 +14,12 @@ A little console-based casino game I built while learning Java! Features a class
 
 ## How to run
 
-Open the project in IntelliJ IDEA or your preferred Java IDE and run `Main.java`.
+From the project root:
+
+```bash
+javac -d . novi/blackjack/*.java novi/higherlower/*.java novi/Main.java
+java novi.Main
+```
 
 ## How to play
 
