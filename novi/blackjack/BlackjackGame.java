@@ -129,9 +129,9 @@ public class BlackjackGame {
             }
 
 
-            int playersHand = player.getHandValue();
-            int dealersHand = dealer.getHandValue();
-            if (dealer.isStaying() && playersHand > dealersHand) {
+            int playersHandValue = player.getHandValue();
+            int dealersHandValue = dealer.getHandValue();
+            if (dealer.isStaying() && playersHandValue > dealersHandValue) {
                 System.out.println("The dealer loses. Congratulations player, you have won this round!");
                 if (continueOrNot()) {
                     resetRound(player, dealer);
@@ -139,7 +139,7 @@ public class BlackjackGame {
                     System.out.println("Thank you for playing");
                     break;
                 }
-            } else if (player.isStaying() && playersHand <= dealersHand) {
+            } else if (player.isStaying() && playersHandValue <= dealersHandValue) {
                 System.out.println("The dealer wins. Player, you have lost this round.");
                 if (continueOrNot()) {
                     resetRound(player, dealer);

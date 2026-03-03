@@ -3,7 +3,6 @@ package novi;
 import java.util.Scanner;
 
 import novi.blackjack.*;
-import novi.higherlower.HigherLowerGame;
 
 public class Main {
 

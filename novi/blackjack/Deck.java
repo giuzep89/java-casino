@@ -9,15 +9,13 @@ import static novi.blackjack.CardValue.CARD_VALUES;
 
 
 public class Deck {
-    private final int numberOfCards = 48;
     private List<Card> remainingCards = new ArrayList<>();
     private boolean isEmpty = false;
-    private Card card;
 
     public Deck() {
         for (int j = 0; j < CARD_SUITES.length; j++) {
             for (int i = 0; i < CARD_VALUES.length; i++) {
-                this.card = new Card(CARD_SUITES[j], CARD_VALUES[i]);
+                Card card = new Card(CARD_SUITES[j], CARD_VALUES[i]);
                 remainingCards.add(card);
             }
         }

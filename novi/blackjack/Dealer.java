@@ -3,7 +3,6 @@ package novi.blackjack;
 public class Dealer {
     private Hand hand = new Hand();
     private boolean isStaying = false;
-    private boolean isBust = false;
 
     public Dealer() {
     }

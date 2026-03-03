@@ -1,7 +1,5 @@
 package novi.blackjack;
 
-import java.util.HashMap;
-
 public class CardValue {
     private String name;
     private int value;
@@ -19,11 +17,6 @@ public class CardValue {
             new CardValue(10, "King"),
             new CardValue(10, "Queen"),
     };
-
-
-//    private int[] values = {2, 3, 4, 5, 6, 7, 8, 9, 10};
-//    private String[] names = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "King", "Queen"};
-
 
     public CardValue(int value, String name) {
         this.value = value;
